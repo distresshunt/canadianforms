@@ -1,0 +1,21 @@
+{
+  "regions": [
+    "ontario",
+    "alberta",
+    "british-columbia",
+    "nova-scotia",
+    "manitoba",
+    "saskatchewan",
+    "federal"
+  ],
+  "forms": [
+    "articles-of-incorporation",
+    "notice-of-directors",
+    "annual-return",
+    "sred-tax-claim",
+    "shareholder-agreement",
+    "trademark-application",
+    "commercial-lease",
+    "independent-contractor-agreement"
+  ]
+}
