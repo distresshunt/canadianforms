@@ -33,8 +33,7 @@ export default function RootLayout({
       <body className="bg-slate-50 text-slate-900 antialiased">
         <CommandPalette />
         {/* Header */}
-        <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <header className="w-full max-w-none px-6 lg:px-16 flex items-center justify-between border-b border-slate-200 bg-white z-50 sticky top-0 h-16">
             <a href="/" className="flex items-center gap-2 group">
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -62,7 +61,6 @@ export default function RootLayout({
             >
               Start Filing →
             </a>
-          </div>
         </header>
 
         <main>{children}</main>
@@ -90,19 +88,19 @@ export default function RootLayout({
               <div>
                 <h3 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Popular Forms</h3>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="/ontario/articles-of-incorporation" className="hover:text-white transition-colors">Articles of Incorporation (ON)</a></li>
-                  <li><a href="/alberta/shareholder-agreement" className="hover:text-white transition-colors">Shareholder Agreement (AB)</a></li>
-                  <li><a href="/british-columbia/commercial-lease" className="hover:text-white transition-colors">Commercial Lease (BC)</a></li>
-                  <li><a href="/federal/trademark-application" className="hover:text-white transition-colors">Trademark Application</a></li>
+                  <li><a href="/ontario/digital-marketing-agencies/articles-of-incorporation" className="hover:text-white transition-colors">Articles of Incorporation (ON)</a></li>
+                  <li><a href="/alberta/commercial-hvac-installers/shareholder-agreement" className="hover:text-white transition-colors">Shareholder Agreement (AB)</a></li>
+                  <li><a href="/british-columbia/commercial-hvac-installers/commercial-lease-agreement" className="hover:text-white transition-colors">Commercial Lease (BC)</a></li>
+                  <li><a href="/federal/e-commerce-development-agencies/trademark-application" className="hover:text-white transition-colors">Trademark Application</a></li>
                 </ul>
               </div>
 
               <div>
                 <h3 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Provinces</h3>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="/directory" className="hover:text-white transition-colors">Ontario</a></li>
-                  <li><a href="/directory" className="hover:text-white transition-colors">Alberta</a></li>
-                  <li><a href="/directory" className="hover:text-white transition-colors">British Columbia</a></li>
+                  <li><a href="/directory/ontario" className="hover:text-white transition-colors">Ontario</a></li>
+                  <li><a href="/directory/alberta" className="hover:text-white transition-colors">Alberta</a></li>
+                  <li><a href="/directory/british-columbia" className="hover:text-white transition-colors">British Columbia</a></li>
                   <li><a href="/directory" className="hover:text-white transition-colors">All Provinces →</a></li>
                 </ul>
               </div>
@@ -111,9 +109,9 @@ export default function RootLayout({
                 <h3 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Company</h3>
                 <ul className="space-y-2 text-sm">
                   <li><a href="/directory" className="hover:text-white transition-colors">Form Directory</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                  <li><a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
+                  <li><a href="/terms" className="hover:text-white transition-colors">Terms of Service</a></li>
+                  <li><a href="mailto:support@canadianforms.ca" className="hover:text-white transition-colors">Contact</a></li>
                 </ul>
               </div>
             </div>

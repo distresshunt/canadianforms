@@ -29,6 +29,18 @@ const searchableItems = formsDb.industries.flatMap(industry =>
   }))
 );
 
+const POPULAR_SEARCHES = [
+  { form: 'non-disclosure-agreement', industry: 'indie-game-studios' },
+  { form: 'commercial-lease', industry: 'botox-medical-spas' },
+  { form: 'independent-contractor-agreement', industry: 'residential-roofing' },
+  { form: 'shareholder-agreement', industry: 'ecommerce-startups' },
+  { form: 'privacy-policy', industry: 'saas-providers' }
+].map(item => ({
+  title: `${toTitleCase(item.form)} for ${toTitleCase(item.industry)}`,
+  industry: item.industry,
+  form: item.form
+}));
+
 const fuse = new Fuse(searchableItems, {
   keys: ['title'],
   threshold: 0.3,
@@ -59,7 +71,7 @@ export default function CommandPalette() {
   }, []);
 
   const { filteredResults, activeRegion } = useMemo(() => {
-    if (!search) return { filteredResults: searchableItems.slice(0, 10), activeRegion: 'ontario' };
+    if (!search) return { filteredResults: POPULAR_SEARCHES, activeRegion: 'ontario' };
     
     let regionMatch = 'ontario';
     let query = search;
@@ -75,7 +87,7 @@ export default function CommandPalette() {
     }
 
     if (!query) {
-       return { filteredResults: searchableItems.slice(0, 10), activeRegion: regionMatch };
+       return { filteredResults: POPULAR_SEARCHES, activeRegion: regionMatch };
     }
 
     const results = fuse.search(query).slice(0, 8).map(r => r.item);
@@ -105,7 +117,10 @@ export default function CommandPalette() {
         </Command.Empty>
 
         {filteredResults.length > 0 && (
-          <Command.Group heading={`Results in ${toTitleCase(activeRegion)}`} className="px-2 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider [&_[cmdk-group-heading]]:mb-2">
+          <Command.Group 
+            heading={!search ? `POPULAR SEARCHES IN ${activeRegion.toUpperCase().replace(/-/g, ' ')}` : `Results in ${toTitleCase(activeRegion)}`} 
+            className="px-2 py-2 text-slate-400 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:mb-2"
+          >
             {filteredResults.map((item, index) => (
               <Command.Item
                 key={`${item.industry}-${item.form}-${index}`}
@@ -114,7 +129,7 @@ export default function CommandPalette() {
                   setSearch("");
                   router.push(`/${activeRegion}/${item.industry}/${item.form}`);
                 }}
-                className="px-4 py-3 rounded-xl hover:bg-blue-50 aria-selected:bg-blue-50 aria-selected:text-blue-700 cursor-pointer flex items-center gap-3 transition-colors text-slate-700 group"
+                className="px-4 py-3 rounded-xl hover:bg-blue-50 aria-selected:bg-blue-50 aria-selected:text-blue-700 cursor-pointer flex items-center gap-3 transition-colors text-slate-700 group normal-case text-base"
               >
                 <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center group-hover:bg-blue-100 group-aria-selected:bg-blue-100 transition-colors">
                   <FileText className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-aria-selected:text-blue-600" />

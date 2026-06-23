@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { CheckCircle, Loader2, ArrowRight, FileText, Lock } from "lucide-react";
+import Script from "next/script";
+import ReactMarkdown from 'react-markdown';
 
-export default function Questionnaire({ regionTitle, formTitle }: { regionTitle: string, formTitle: string }) {
+export default function Questionnaire({ regionTitle, industryTitle, formTitle }: { regionTitle: string, industryTitle: string, formTitle: string }) {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     businessName: "",
@@ -12,11 +14,40 @@ export default function Questionnaire({ regionTitle, formTitle }: { regionTitle:
   });
   
   const [loadingStep, setLoadingStep] = useState(0);
+  const [isGeneratingTest, setIsGeneratingTest] = useState(false);
+  const [generatedDocument, setGeneratedDocument] = useState<string | null>(null);
   const loadingMessages = [
     "Analyzing provincial requirements...",
     "Formatting legal clauses...",
     "Finalizing PDF..."
   ];
+
+  const handleAdminTest = async () => {
+    setIsGeneratingTest(true);
+    try {
+      const response = await fetch('/api/generate-document', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          region: regionTitle,
+          industry: industryTitle,
+          form: formTitle,
+          answers: formData
+        })
+      });
+      const data = await response.json();
+      if (data.document) {
+        setGeneratedDocument(data.document);
+      } else {
+        alert('Failed to generate document.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error generating document.');
+    } finally {
+      setIsGeneratingTest(false);
+    }
+  };
 
   useEffect(() => {
     if (step === 4) {
@@ -35,6 +66,20 @@ export default function Questionnaire({ regionTitle, formTitle }: { regionTitle:
   }, [step]);
 
   const handleNext = () => setStep((s) => s + 1);
+
+  if (generatedDocument) {
+    return (
+      <div className="bg-white rounded-2xl border border-slate-100 shadow-xl overflow-hidden min-h-[400px] max-h-[800px] overflow-y-auto p-8 animate-fade-in-up">
+        <h2 className="text-2xl font-extrabold text-slate-900 mb-6 border-b pb-4">Generated Document (Admin Mode)</h2>
+        <div className="prose prose-slate max-w-none mb-8">
+          <ReactMarkdown>{generatedDocument}</ReactMarkdown>
+        </div>
+        <button onClick={() => setGeneratedDocument(null)} className="w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-xl hover:bg-blue-700 transition-colors">
+          Close Viewer
+        </button>
+      </div>
+    );
+  }
 
   if (step === 5) {
     return (
@@ -62,12 +107,16 @@ export default function Questionnaire({ regionTitle, formTitle }: { regionTitle:
             Your official {formTitle} for {regionTitle} is ready. All legal clauses have been formatted to provincial standards.
           </p>
 
-          <button
-            onClick={() => alert("Redirecting to Stripe Checkout...")}
+          <a
+            href="https://gumroad.com/l/your-product-link"
+            data-gumroad-overlay-checkout="true"
             className="w-full bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-green-600/20 transition-all flex items-center justify-center gap-2 group text-lg"
           >
             Pay $49.00 CAD to Download
             <Lock className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
+          </a>
+          <button onClick={handleAdminTest} disabled={isGeneratingTest} className="mt-4 text-xs text-slate-400 hover:text-blue-500 underline disabled:opacity-50 transition-colors">
+            {isGeneratingTest ? "Generating Test Document..." : "Admin Bypass: Test Generate Document"}
           </button>
           <p className="text-xs text-slate-500 mt-4 flex items-center justify-center gap-1">
             <Lock className="w-3 h-3" /> Secure 256-bit Checkout
@@ -95,7 +144,8 @@ export default function Questionnaire({ regionTitle, formTitle }: { regionTitle:
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8 animate-fade-in-up">
+    <>
+    <div id="questionnaire" className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8 animate-fade-in-up scroll-mt-24">
       <div className="flex items-center gap-2 text-sm font-medium text-blue-600 mb-8">
         <span className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100">
           {step}
@@ -179,5 +229,7 @@ export default function Questionnaire({ regionTitle, formTitle }: { regionTitle:
         </div>
       </div>
     </div>
+      <Script src="https://gumroad.com/js/gumroad.js" strategy="lazyOnload" />
+    </>
   );
 }

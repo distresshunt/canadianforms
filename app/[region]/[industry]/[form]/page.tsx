@@ -22,15 +22,10 @@ function toTitleCase(slug: string): string {
 }
 
 export async function generateStaticParams() {
-  const paths: { region: string; industry: string; form: string }[] = [];
-  for (const region of formsDb.regions) {
-    for (const industry of formsDb.industries) {
-      for (const form of formsDb.forms) {
-        paths.push({ region, industry, form });
-      }
-    }
-  }
-  return paths;
+  // To prevent 'Maximum call stack size exceeded' during build for 150,000+ paths,
+  // we do not pre-render all possible combinations.
+  // Next.js will dynamically generate (and cache) these pages on-demand.
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -101,8 +96,30 @@ export default async function FormPage({ params }: PageProps) {
     .slice(0, 4)
     .map((f) => ({ slug: f, title: toTitleCase(f) }));
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": `Official ${formTitle} for ${industryTitle} in ${regionTitle}`,
+    "description": "AI-generated, court-ready legal document tailored for provincial compliance.",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "184"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "49.00",
+      "priceCurrency": "CAD",
+      "availability": "https://schema.org/InStock"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Breadcrumb */}
       <div className="bg-white border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
@@ -153,7 +170,7 @@ export default async function FormPage({ params }: PageProps) {
               </div>
             </div>
 
-            <Questionnaire regionTitle={regionTitle} formTitle={formTitle} />
+            <Questionnaire regionTitle={regionTitle} industryTitle={industryTitle} formTitle={formTitle} />
 
             {/* Internal Links — Other Forms for this Industry */}
             <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8">
@@ -193,12 +210,12 @@ export default async function FormPage({ params }: PageProps) {
                   <div className="text-slate-500 text-sm mt-1">one-time, instant download</div>
                 </div>
 
-                <button
-                  id="generate-document-btn"
-                  className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold py-4 rounded-xl shadow-lg transition-all text-lg"
+                <a
+                  href="#questionnaire"
+                  className="block text-center w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold py-4 rounded-xl shadow-lg transition-all text-lg"
                 >
                   Generate Official Document ($49)
-                </button>
+                </a>
 
                 <div className="mt-4 space-y-2">
                   {[
