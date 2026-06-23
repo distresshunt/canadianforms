@@ -93,7 +93,7 @@ export default function HomePage() {
     <>
       {/* Hero Section */}
       <section id="search" className="relative overflow-hidden bg-white">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-50 via-white to-white pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-50 via-white to-white pointer-events-none" />
         <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
           <div className="w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNMzYgMzRhMiAyIDAgMSAxIDAtNCAyIDIgMCAwIDEgMCA0IiBmaWxsPSIjMjU2M2ViIi8+PC9nPjwvc3ZnPg==')] bg-repeat" />
         </div>
