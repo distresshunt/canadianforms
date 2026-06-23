@@ -5,7 +5,7 @@ import formsDb from "@/src/data/forms-db.json";
 import Questionnaire from "@/src/components/Questionnaire";
 
 interface PageProps {
-  params: Promise<{ region: string; form: string }>;
+  params: Promise<{ region: string; industry: string; form: string }>;
 }
 
 function toTitleCase(slug: string): string {
@@ -22,38 +22,41 @@ function toTitleCase(slug: string): string {
 }
 
 export async function generateStaticParams() {
-  const paths: { region: string; form: string }[] = [];
+  const paths: { region: string; industry: string; form: string }[] = [];
   for (const region of formsDb.regions) {
-    for (const form of formsDb.forms) {
-      paths.push({ region, form });
+    for (const industry of formsDb.industries) {
+      for (const form of formsDb.forms) {
+        paths.push({ region, industry, form });
+      }
     }
   }
   return paths;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { region, form } = await params;
+  const { region, industry, form } = await params;
 
-  if (!formsDb.regions.includes(region) || !formsDb.forms.includes(form)) {
+  if (!formsDb.regions.includes(region) || !formsDb.industries.includes(industry) || !formsDb.forms.includes(form)) {
     return { title: "Not Found" };
   }
 
   const regionTitle = toTitleCase(region);
+  const industryTitle = toTitleCase(industry);
   const formTitle = toTitleCase(form);
 
   return {
-    title: `${formTitle} — ${regionTitle} | CanadianForms.ca`,
-    description: `File your ${formTitle} in ${regionTitle} instantly with AI. Skip $1,500 lawyer fees. Province-accurate document generated in minutes for just $49.`,
+    title: `Official ${formTitle} for ${industryTitle} in ${regionTitle} | CanadianForms.ca`,
+    description: `Stop paying lawyer fees. Generate a court-ready ${formTitle} tailored specifically for ${industryTitle} operating under ${regionTitle} provincial guidelines. Ready to sign in minutes.`,
     keywords: [
-      `${formTitle} ${regionTitle}`,
+      `${formTitle} ${industryTitle} ${regionTitle}`,
       `${regionTitle} ${formTitle} template`,
       `file ${formTitle} Canada`,
       `${regionTitle} corporate forms`,
       `AI legal documents ${regionTitle}`,
     ],
     openGraph: {
-      title: `${formTitle} — ${regionTitle}`,
-      description: `AI-generated ${formTitle} for ${regionTitle}. Compliant, instant, $49.`,
+      title: `Official ${formTitle} for ${industryTitle} in ${regionTitle}`,
+      description: `AI-generated ${formTitle} for ${industryTitle} in ${regionTitle}. Compliant, instant, $49.`,
     },
   };
 }
@@ -64,43 +67,6 @@ const trustSignals = [
   { icon: <Download className="w-5 h-5 text-blue-600" />, text: "Instant PDF download" },
   { icon: <Lock className="w-5 h-5 text-blue-600" />, text: "256-bit encrypted" },
 ];
-
-const faqByForm: Record<string, { q: string; a: string }[]> = {
-  "articles-of-incorporation": [
-    {
-      q: "What information do I need to incorporate?",
-      a: "You need the corporation name, registered office address, director information, share structure, and the province of incorporation.",
-    },
-    {
-      q: "How long does it take to incorporate after filing?",
-      a: "Provincial incorporations are typically processed within 1–5 business days. Federal incorporation via Corporations Canada is often same-day online.",
-    },
-    {
-      q: "Can I use this document to incorporate federally?",
-      a: "This form is designed for the selected province. For federal incorporation, select 'Federal' as your jurisdiction.",
-    },
-  ],
-  "shareholder-agreement": [
-    {
-      q: "Is a shareholder agreement legally required?",
-      a: "No, but it is strongly recommended for any company with more than one shareholder to prevent disputes.",
-    },
-    {
-      q: "Does this cover buy-sell provisions?",
-      a: "Yes. Our AI-generated shareholder agreement includes drag-along, tag-along, and right of first refusal clauses.",
-    },
-  ],
-  "commercial-lease": [
-    {
-      q: "Is this compliant with provincial commercial tenancy law?",
-      a: "Yes. The document is tailored to the selected province's Commercial Tenancies Act and regulations.",
-    },
-    {
-      q: "Can I customize the lease term and rent amount?",
-      a: "Absolutely. Our AI questionnaire lets you specify all key terms before generating your document.",
-    },
-  ],
-};
 
 const defaultFaq = [
   {
@@ -118,38 +84,36 @@ const defaultFaq = [
 ];
 
 export default async function FormPage({ params }: PageProps) {
-  const { region, form } = await params;
+  const { region, industry, form } = await params;
 
   // Validate the route against the database
-  if (!formsDb.regions.includes(region) || !formsDb.forms.includes(form)) {
+  if (!formsDb.regions.includes(region) || !formsDb.industries.includes(industry) || !formsDb.forms.includes(form)) {
     notFound();
   }
 
   const regionTitle = toTitleCase(region);
+  const industryTitle = toTitleCase(industry);
   const formTitle = toTitleCase(form);
-  const faqs = faqByForm[form] ?? defaultFaq;
+  const faqs = defaultFaq; // Add custom FAQs here later if needed
 
   const relatedForms = formsDb.forms
     .filter((f) => f !== form)
     .slice(0, 4)
     .map((f) => ({ slug: f, title: toTitleCase(f) }));
 
-  const otherRegions = formsDb.regions
-    .filter((r) => r !== region)
-    .slice(0, 4)
-    .map((r) => ({ slug: r, title: toTitleCase(r) }));
-
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Breadcrumb */}
       <div className="bg-white border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <nav className="flex items-center gap-2 text-sm text-slate-500">
+          <nav className="flex flex-wrap items-center gap-2 text-sm text-slate-500">
             <a href="/" className="hover:text-blue-600 transition-colors">Home</a>
             <span>/</span>
             <a href="/directory" className="hover:text-blue-600 transition-colors">Directory</a>
             <span>/</span>
-            <span className="text-slate-700 font-medium">{regionTitle}</span>
+            <a href={`/directory/${region}`} className="hover:text-blue-600 transition-colors">{regionTitle}</a>
+            <span>/</span>
+            <a href={`/directory/${region}/${industry}`} className="hover:text-blue-600 transition-colors">{industryTitle}</a>
             <span>/</span>
             <span className="text-slate-900 font-semibold">{formTitle}</span>
           </nav>
@@ -167,17 +131,15 @@ export default async function FormPage({ params }: PageProps) {
               <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6">
                 <div className="flex items-center gap-2 text-blue-200 text-sm mb-3">
                   <FileText className="w-4 h-4" />
-                  <span>{regionTitle} Legal Document</span>
+                  <span>{industryTitle} Document — {regionTitle}</span>
                 </div>
                 <h1 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-                  File your {formTitle} in {regionTitle} instantly with AI.
+                  Official {formTitle} for {industryTitle} in {regionTitle}
                 </h1>
               </div>
               <div className="px-8 py-6">
                 <p className="text-lg text-slate-600 leading-relaxed">
-                  Skip the <strong className="text-slate-900">$1,500 lawyer fees</strong>. Our AI agent knows exact{" "}
-                  <strong className="text-slate-900">{regionTitle}</strong> provincial requirements. Answer 3 questions
-                  and generate your ready-to-sign PDF.
+                  Stop paying lawyer fees. Generate a court-ready <strong className="text-slate-900">{formTitle}</strong> tailored specifically for <strong className="text-slate-900">{industryTitle}</strong> operating under <strong className="text-slate-900">{regionTitle}</strong> provincial guidelines. Ready to sign in minutes.
                 </p>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
@@ -193,41 +155,20 @@ export default async function FormPage({ params }: PageProps) {
 
             <Questionnaire regionTitle={regionTitle} formTitle={formTitle} />
 
-            {/* Internal Links — Other Forms in This Region */}
+            {/* Internal Links — Other Forms for this Industry */}
             <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8">
               <h2 className="text-xl font-bold text-slate-900 mb-4">
-                Other {regionTitle} forms
+                Other forms for {industryTitle} in {regionTitle}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {relatedForms.map((rf) => (
                   <a
                     key={rf.slug}
-                    href={`/${region}/${rf.slug}`}
+                    href={`/${region}/${industry}/${rf.slug}`}
                     className="flex items-center justify-between p-4 rounded-xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50 transition-all group"
                   >
                     <span className="text-sm font-medium text-slate-700 group-hover:text-blue-700">
                       {rf.title}
-                    </span>
-                    <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Internal Links — Same Form in Other Regions */}
-            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8">
-              <h2 className="text-xl font-bold text-slate-900 mb-4">
-                {formTitle} in other provinces
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {otherRegions.map((or_) => (
-                  <a
-                    key={or_.slug}
-                    href={`/${or_.slug}/${form}`}
-                    className="flex items-center justify-between p-4 rounded-xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50 transition-all group"
-                  >
-                    <span className="text-sm font-medium text-slate-700 group-hover:text-blue-700">
-                      {formTitle} — {or_.title}
                     </span>
                     <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
                   </a>
@@ -277,25 +218,6 @@ export default async function FormPage({ params }: PageProps) {
                   <div className="flex items-center justify-center gap-2 text-slate-500 text-xs">
                     <Lock className="w-3.5 h-3.5" />
                     Secured by 256-bit SSL encryption
-                  </div>
-                </div>
-              </div>
-
-              {/* Lawyer Comparison */}
-              <div className="bg-red-50 rounded-2xl border border-red-100 p-6">
-                <h3 className="font-bold text-slate-900 text-sm mb-3">💡 Compare your options</h3>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-slate-600">Bay Street Lawyer</span>
-                    <span className="font-semibold text-red-600 line-through">$1,500–$3,000</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-600">Legal Zoom</span>
-                    <span className="font-semibold text-orange-500 line-through">$299+/yr</span>
-                  </div>
-                  <div className="flex justify-between border-t border-red-200 pt-2 mt-2">
-                    <span className="font-bold text-slate-900">CanadianForms.ca</span>
-                    <span className="font-black text-green-600">$49 flat</span>
                   </div>
                 </div>
               </div>
