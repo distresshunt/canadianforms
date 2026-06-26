@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/directory/layout,_N_T_/directory/[region]/layout,_N_T_/directory/[region]/page,_N_T_/directory/quebec"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/directory/$d$region/__PAGE__",
+    "/directory/$d$region",
+    "/directory",
+    "/_index",
+    "/_head"
+  ]
+}

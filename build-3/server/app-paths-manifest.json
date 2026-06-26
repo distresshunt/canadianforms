@@ -1,0 +1,15 @@
+{
+  "/[region]/[industry]/[form]/page": "app/[region]/[industry]/[form]/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/generate-document/route": "app/api/generate-document/route.js",
+  "/directory/[region]/[industry]/page": "app/directory/[region]/[industry]/page.js",
+  "/directory/[region]/page": "app/directory/[region]/page.js",
+  "/directory/page": "app/directory/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/privacy/page": "app/privacy/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/sitemap/[__metadata_id__]/route": "app/sitemap/[__metadata_id__]/route.js",
+  "/terms/page": "app/terms/page.js"
+}

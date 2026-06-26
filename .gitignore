@@ -42,3 +42,15 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 node_modules_*
+
+# Dependency directories
+node_modules/
+functions/node_modules/
+
+# Firebase build and cache
+.firebase/
+firebase-export-*/
+
+# Next.js build output (since I see next-swc in your error)
+.next/
+out/

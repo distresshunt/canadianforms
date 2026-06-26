@@ -38,7 +38,9 @@
     "build/types/**/*.ts",
     "build/dev/types/**/*.ts",
     "build-2/types/**/*.ts",
-    "build-2/dev/types/**/*.ts"
+    "build-2/dev/types/**/*.ts",
+    "build-3/types/**/*.ts",
+    "build-3/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

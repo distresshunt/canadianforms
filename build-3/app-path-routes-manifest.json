@@ -1,0 +1,15 @@
+{
+  "/[region]/[industry]/[form]/page": "/[region]/[industry]/[form]",
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/generate-document/route": "/api/generate-document",
+  "/directory/[region]/[industry]/page": "/directory/[region]/[industry]",
+  "/directory/[region]/page": "/directory/[region]",
+  "/directory/page": "/directory",
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/",
+  "/privacy/page": "/privacy",
+  "/robots.txt/route": "/robots.txt",
+  "/sitemap/[__metadata_id__]/route": "/sitemap/[__metadata_id__]",
+  "/terms/page": "/terms"
+}

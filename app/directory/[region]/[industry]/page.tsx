@@ -8,13 +8,9 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const paths: { region: string; industry: string }[] = [];
-  for (const region of formsDb.regions) {
-    for (const industry of formsDb.industries) {
-      paths.push({ region, industry });
-    }
-  }
-  return paths;
+  // Return an empty array to prevent OOM during build
+  // Next.js will dynamically generate (and cache) these pages on-demand.
+  return [];
 }
 
 function toTitleCase(slug: string): string {

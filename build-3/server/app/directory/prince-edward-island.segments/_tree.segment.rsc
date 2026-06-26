@@ -1,0 +1,2 @@
+:HL["/_next/static/chunks/0stuu31cjdrtf.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"directory","param":null,"prefetchHints":0,"slots":{"children":{"name":"region","param":{"type":"d","key":"prince-edward-island","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"a1HQ0QjdcrC1vC0CJtrjv"}

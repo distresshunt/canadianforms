@@ -1,0 +1,117 @@
+[
+  {
+    "route": "/[region]/[industry]/[form]",
+    "firstLoadUncompressedJsBytes": 723798,
+    "firstLoadChunkPaths": [
+      "build-3\\static\\chunks\\0jz00fse87nfu.js",
+      "build-3\\static\\chunks\\3va8gbfqwb0lm.js",
+      "build-3\\static\\chunks\\158myu8e_yme3.js",
+      "build-3\\static\\chunks\\1uzt4h05fcxqp.js",
+      "build-3\\static\\chunks\\10cjp_mqoclfc.js",
+      "build-3\\static\\chunks\\3dvr62udy5zq3.js",
+      "build-3\\static\\chunks\\12ng9y1xmtxdd.js",
+      "build-3\\static\\chunks\\2kgk_s3425d-6.js",
+      "build-3\\static\\chunks\\2khkmde2okojn.js",
+      "build-3\\static\\chunks\\turbopack-0iija_h4g5l2a.js"
+    ]
+  },
+  {
+    "route": "/",
+    "firstLoadUncompressedJsBytes": 612938,
+    "firstLoadChunkPaths": [
+      "build-3\\static\\chunks\\0jz00fse87nfu.js",
+      "build-3\\static\\chunks\\3va8gbfqwb0lm.js",
+      "build-3\\static\\chunks\\158myu8e_yme3.js",
+      "build-3\\static\\chunks\\1-hxcd71tu8c9.js",
+      "build-3\\static\\chunks\\3dvr62udy5zq3.js",
+      "build-3\\static\\chunks\\12ng9y1xmtxdd.js",
+      "build-3\\static\\chunks\\2kgk_s3425d-6.js",
+      "build-3\\static\\chunks\\2khkmde2okojn.js",
+      "build-3\\static\\chunks\\turbopack-0iija_h4g5l2a.js"
+    ]
+  },
+  {
+    "route": "/_not-found",
+    "firstLoadUncompressedJsBytes": 596072,
+    "firstLoadChunkPaths": [
+      "build-3\\static\\chunks\\0jz00fse87nfu.js",
+      "build-3\\static\\chunks\\3va8gbfqwb0lm.js",
+      "build-3\\static\\chunks\\158myu8e_yme3.js",
+      "build-3\\static\\chunks\\3dvr62udy5zq3.js",
+      "build-3\\static\\chunks\\12ng9y1xmtxdd.js",
+      "build-3\\static\\chunks\\2kgk_s3425d-6.js",
+      "build-3\\static\\chunks\\2khkmde2okojn.js",
+      "build-3\\static\\chunks\\turbopack-0iija_h4g5l2a.js"
+    ]
+  },
+  {
+    "route": "/directory",
+    "firstLoadUncompressedJsBytes": 596072,
+    "firstLoadChunkPaths": [
+      "build-3\\static\\chunks\\0jz00fse87nfu.js",
+      "build-3\\static\\chunks\\3va8gbfqwb0lm.js",
+      "build-3\\static\\chunks\\158myu8e_yme3.js",
+      "build-3\\static\\chunks\\3dvr62udy5zq3.js",
+      "build-3\\static\\chunks\\12ng9y1xmtxdd.js",
+      "build-3\\static\\chunks\\2kgk_s3425d-6.js",
+      "build-3\\static\\chunks\\2khkmde2okojn.js",
+      "build-3\\static\\chunks\\turbopack-0iija_h4g5l2a.js"
+    ]
+  },
+  {
+    "route": "/directory/[region]",
+    "firstLoadUncompressedJsBytes": 596072,
+    "firstLoadChunkPaths": [
+      "build-3\\static\\chunks\\0jz00fse87nfu.js",
+      "build-3\\static\\chunks\\3va8gbfqwb0lm.js",
+      "build-3\\static\\chunks\\158myu8e_yme3.js",
+      "build-3\\static\\chunks\\3dvr62udy5zq3.js",
+      "build-3\\static\\chunks\\12ng9y1xmtxdd.js",
+      "build-3\\static\\chunks\\2kgk_s3425d-6.js",
+      "build-3\\static\\chunks\\2khkmde2okojn.js",
+      "build-3\\static\\chunks\\turbopack-0iija_h4g5l2a.js"
+    ]
+  },
+  {
+    "route": "/directory/[region]/[industry]",
+    "firstLoadUncompressedJsBytes": 596072,
+    "firstLoadChunkPaths": [
+      "build-3\\static\\chunks\\0jz00fse87nfu.js",
+      "build-3\\static\\chunks\\3va8gbfqwb0lm.js",
+      "build-3\\static\\chunks\\158myu8e_yme3.js",
+      "build-3\\static\\chunks\\3dvr62udy5zq3.js",
+      "build-3\\static\\chunks\\12ng9y1xmtxdd.js",
+      "build-3\\static\\chunks\\2kgk_s3425d-6.js",
+      "build-3\\static\\chunks\\2khkmde2okojn.js",
+      "build-3\\static\\chunks\\turbopack-0iija_h4g5l2a.js"
+    ]
+  },
+  {
+    "route": "/privacy",
+    "firstLoadUncompressedJsBytes": 596072,
+    "firstLoadChunkPaths": [
+      "build-3\\static\\chunks\\0jz00fse87nfu.js",
+      "build-3\\static\\chunks\\3va8gbfqwb0lm.js",
+      "build-3\\static\\chunks\\158myu8e_yme3.js",
+      "build-3\\static\\chunks\\3dvr62udy5zq3.js",
+      "build-3\\static\\chunks\\12ng9y1xmtxdd.js",
+      "build-3\\static\\chunks\\2kgk_s3425d-6.js",
+      "build-3\\static\\chunks\\2khkmde2okojn.js",
+      "build-3\\static\\chunks\\turbopack-0iija_h4g5l2a.js"
+    ]
+  },
+  {
+    "route": "/terms",
+    "firstLoadUncompressedJsBytes": 596072,
+    "firstLoadChunkPaths": [
+      "build-3\\static\\chunks\\0jz00fse87nfu.js",
+      "build-3\\static\\chunks\\3va8gbfqwb0lm.js",
+      "build-3\\static\\chunks\\158myu8e_yme3.js",
+      "build-3\\static\\chunks\\3dvr62udy5zq3.js",
+      "build-3\\static\\chunks\\12ng9y1xmtxdd.js",
+      "build-3\\static\\chunks\\2kgk_s3425d-6.js",
+      "build-3\\static\\chunks\\2khkmde2okojn.js",
+      "build-3\\static\\chunks\\turbopack-0iija_h4g5l2a.js"
+    ]
+  }
+]
